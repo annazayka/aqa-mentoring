@@ -2,6 +2,8 @@ import java.io.IOException;
 
 public class Homework1 {
     public static void main(String[] args) throws IOException {
+
+
         System.out.print("Enter your char: ");
         while (true) {
             int inputInt = System.in.read();
