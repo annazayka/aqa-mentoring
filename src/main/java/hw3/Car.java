@@ -1,21 +1,27 @@
 package hw3;
 
+import java.util.List;
+
 public class Car {
+    public Driver driver;
+    public Engine engine;
+    public List<Wheel> wheels;
+
     public static void main(String[] args) {
-        startCar("Hanna");
+        new Car().startCar("Hanna");
 
     }
 
-    private static String startCar(String driverName) {
-        Driver putCarKey = new Driver();
-        putCarKey.putCarKey(driverName);
-        putCarKey.turnCarKey();
+    private String startCar(String driverName) {
+        driver = new Driver();
+        driver.putCarKey(driverName);
+        driver.turnCarKey();
 
-        Engine startEngine = new Engine();
+        engine = new Engine(12F);
 
-        if (startEngine.isOk() == true) {
-            Engine engineStart = new Engine();
-            int speed = engineStart.putGas(1);
+        if (engine.isOk() == true) {
+//            Engine engineStart = new Engine();
+            int speed = engine.putGas(1);
             return "Go";
 
         } else return "not Go";
