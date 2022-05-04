@@ -7,7 +7,7 @@ public class Car {
     private String color;
     private int keys;
     private Engine engine;
-    private List<Wheel> wheel;
+    private Wheel wheel;
     private Driver driver;
 
 
@@ -15,9 +15,9 @@ public class Car {
         this.engine = engine;
     }
 
-    public Car(Engine engine1, Driver driver){
+    public Car(Engine engine1, Wheel wheel){
         this.engine=engine1;
-         this.driver=driver;
+         this.wheel=wheel;
 
     }
 
@@ -48,10 +48,12 @@ public class Car {
         return keys;
     }
 
+
+
     public void createCar() {
         System.out.println("Вы выбрали"+getColor()+" цвет машинки");
         System.out.println( getEngine().startEngine());
-        getDriver().drive();
+        //getDriver().drive();
 
     }
 }

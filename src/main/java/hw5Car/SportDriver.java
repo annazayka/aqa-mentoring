@@ -4,8 +4,8 @@ public class SportDriver extends Driver {
 
     public int category;
 
-    public SportDriver(int category,int expYears) {
-        super(expYears);
+    public SportDriver(int category,int expYears,int licence) {
+        super(expYears,licence);
         this.category = category;
     }
 
@@ -14,6 +14,8 @@ public class SportDriver extends Driver {
     }
 
     public void putGas() {
+
+     //   System.out.println( checkKey(car));
         System.out.println("педальку в пол потому что он профи");
     }
 }

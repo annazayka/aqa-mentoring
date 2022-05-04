@@ -5,8 +5,8 @@ public class LorryDriver extends  Driver{
 
     public boolean fozzy;
 
-    public LorryDriver(int expYears,boolean fozzy) {
-        super(expYears);
+    public LorryDriver(int expYears,boolean fozzy, int licence) {
+        super(expYears,licence);
         this.fozzy=fozzy;
     }
 

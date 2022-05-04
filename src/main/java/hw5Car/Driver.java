@@ -18,23 +18,26 @@ public class Driver {
         System.out.println("simple drive");
     }
 
-    public Driver(int expYears) {
+    public Driver(int expYears, int licence) {
         this.expYears = expYears;
+        this.licence=licence;
     }
 
     public void putCarKey(int keys) {
         System.out.println("вставил ключи");
-        this.putGas();
+
 
     }
 
     public void putGas() {
-        //return "нажал газ";
-System.out.println("нажал на газ");
+      //   System.out.println(this.checkKey(car));
+         System.out.println("нажал на газ");
     }
 
-    public String stopGas(int keys) {
-        return "нажал на тормоз";
+    public String checkKey(Car car) {
+        if (car.getKeys()==123)
+        return "Ключи ОК";
+        else return "wrong key";
 
     }
 
