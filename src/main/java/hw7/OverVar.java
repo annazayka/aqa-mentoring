@@ -4,7 +4,7 @@ public class OverVar {
 
     public static void main(String[] args)
     {
-        fun("0","yu");
+        fun("0hjhkjhkjhkh","yhjhkjhkjhku");
     }
 
     //varargs method with float datatype
