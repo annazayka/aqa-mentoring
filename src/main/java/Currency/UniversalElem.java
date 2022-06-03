@@ -1,6 +1,6 @@
 package Currency;
 
-public class UniversalElem implements Elem {
+public class UniversalElem implements WrongElem {
 
     public  static String getUsdSelectorB() {
         return "\"table[class^='rate table'] td:nth-child(2)\"";

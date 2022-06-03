@@ -13,6 +13,7 @@ import static java.lang.Thread.sleep;
 public class SeleniumClass {
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", "/Users/hanna/Documents/chromedriver");
+
         WebDriver driver = new ChromeDriver();
         driver.get("https://airslate.com/login");
         try

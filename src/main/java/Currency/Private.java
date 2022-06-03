@@ -1,30 +1,31 @@
 package Currency;
 
-import org.openqa.selenium.By;
+import Framework.Elem;
+import Framework.Listener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class Private implements CurrencyI {
 public WebDriver driver;
 private String url="https://privatbank.ua/";
-
-    public Private(WebDriver driver) {
+public Listener listener;
+    public Private() {
         this.driver = driver;
     }
 
 
     @Override
     public Double getRateBuy() {
-      driver.get(url);
-      WebElement usdRateB = driver.findElement(By.cssSelector(PrivatElem.getUsdSelectorB()));
-       return Double.valueOf(usdRateB.getText());
+        WebElement privateCur = new Elem(PrivatElem.getUsdSelectorB()).findElement();
+       listener.assertElementsPresent(new Elem("test"));
+
+        return Double.valueOf(privateCur.getText());
     }
 
     @Override
     public Double getSoldBuy() {
-        driver.get(url);
-        WebElement usdRateS = driver.findElement(By.cssSelector(PrivatElem.getUsdSelectorS()));
-        return Double.valueOf(usdRateS.getText());
+        WebElement privateCur = new Elem(PrivatElem.getUsdSelectorS()).findElement();
+        return Double.valueOf(privateCur.getText());
     }
 
 
