@@ -13,15 +13,19 @@ public class Driver {
     public static WebDriver getChromeDriver() {
         if (driver == null) {
             driver = new ChromeDriver();
+
         }
         return driver;
     }
 
     public static WebDriver getChromeDriver(ChromeOptions options) {
         if (driver == null) {
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(options);
+
         }
         return driver;
     }
+
+
 
 }
