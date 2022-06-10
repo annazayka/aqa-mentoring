@@ -1,10 +1,8 @@
 package Framework;
 
-import Currency.logg;
 import org.apache.log4j.Logger;
 
 
-import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;

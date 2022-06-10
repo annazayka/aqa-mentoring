@@ -19,26 +19,27 @@ import java.util.List;
 public class TestNew {
     static final String path = "src/main/log.properties"; //где правильно это определять?
 
+
     public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "/Users/hanna/Documents/chromedriver");
-        PropertyConfigurator.configure(path); //где правильно это определять?
+//        System.setProperty("webdriver.chrome.driver", "/Users/hanna/Documents/chromedriver");
+//        PropertyConfigurator.configure(path); //где правильно это определять?
         ChromeOptions options = new Options()
                 .openBrowserFullScreen()
                 //  .addCustomUserAgent()
                 .setPageLoadStrategy(PageLoadStrategy.EAGER)
                 .getOptions();
 
-        WebDriver driver = Driver.getChromeDriver();
+        WebDriver driver = Driver.getChromeDriver(options);
         EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
         eventDriver.register(new Listener());
 
-        Elem.initWebDriver(eventDriver);
+//        Elem.initWebDriver(eventDriver);
 
         List<Summary> summary = new LinkedList();
 
 
         //как это правильно организовать? отдельный клас?
-        PrivatPage pp = new PrivatPage(eventDriver);
+        PrivatPage pp = new PrivatPage();
         pp.openPage();
         summary.add(new Summary("privat", pp.getUsdBuyRate(), pp.getUsdSellRate()));
 
