@@ -1,38 +1,53 @@
 package hwMovie;
 
+import Framework.Driver;
+import Framework.Elem;
+import Framework.Listener;
+import Framework.Options;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.*;
 
 
 public class hwMovie {
+    static final String path = "src/main/log.properties"; //где правильно это определять?
     public static void main(String[] args) {
 
-        List<Movie> movies = new LinkedList<Movie>();
+      //  List<Movie> movies = new LinkedList<Movie>();
+
         System.setProperty("webdriver.chrome.driver", "/Users/hanna/Documents/chromedriver");
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.imdb.com/chart/top/");
+        PropertyConfigurator.configure(path); //где правильно это определять?
+        ChromeOptions options = new Options()
+                .openBrowserFullScreen()
+                //  .addCustomUserAgent()
+                .setPageLoadStrategy(PageLoadStrategy.EAGER)
+                .getOptions();
 
-        List<WebElement> rows = driver.findElements(By.cssSelector(".lister-list tr"));
-        for (WebElement row : rows) {
-            WebElement title = row.findElement(By.cssSelector(".lister-list tr .titleColumn a"));
-            WebElement rating = row.findElement(By.cssSelector(".lister-list tr .imdbRating"));
-            WebElement year = row.findElement(By.cssSelector(".lister-list tr .secondaryInfo"));
-            WebElement position = row.findElement(By.cssSelector(".lister-list tr .posterColumn [name=\"rk\"]"));
-            movies.add(new Movie(title.getText(), Double.parseDouble(rating.getText()), Integer.parseInt(position.getAttribute("data-value")), Integer.parseInt(year.getText().substring(1, 5))));
-        }
+        WebDriver driver = Driver.getChromeDriver();
+        EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
+        eventDriver.register(new Listener());
 
-        sortNature(movies);
-        sortPosition(movies);
-        sortTitle(movies);
-        hardSort(movies);
+        Elem.initWebDriver(eventDriver);
+
+
+
+        MoviePage mp = new MoviePage(eventDriver);
+        mp.openPage();
+        sortNature(mp.getMovieInfo());
+        sortPosition(mp.getMovieInfo());
+        sortTitle(mp.getMovieInfo());
+        hardSort(mp.getMovieInfo());
 
 
         Map<Integer, Movie> map = new HashMap<>();
-        for (Movie mv : movies) {
+        for (Movie mv : mp.getMovieInfo()) {
             map.put(mv.getPosition(), mv);
         }
         System.out.println("\n~~~ сделать мап");
