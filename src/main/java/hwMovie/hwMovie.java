@@ -36,24 +36,30 @@ public class hwMovie {
 
         Elem.initWebDriver(eventDriver);
 
-
-
         MoviePage mp = new MoviePage(eventDriver);
         mp.openPage();
-        sortNature(mp.getMovieInfo());
-        sortPosition(mp.getMovieInfo());
-        sortTitle(mp.getMovieInfo());
-        hardSort(mp.getMovieInfo());
+        List<Movie> movies = mp.getMovieInfo();
+        sortNature(movies);
+        sortPosition(movies);
+        sortTitle(movies);
+        hardSort(movies);
+        listToSet(movies);
 
 
         Map<Integer, Movie> map = new HashMap<>();
-        for (Movie mv : mp.getMovieInfo()) {
+        for (Movie mv : movies) {
             map.put(mv.getPosition(), mv);
         }
+
         System.out.println("\n~~~ сделать мап");
         map.forEach((key, value) -> System.out.println(key + ":" + value));
 
+
+
+
+
     }
+
 
 
     public static void sortNature(List<Movie> movies) {
@@ -85,6 +91,17 @@ public class hwMovie {
         System.out.println("\n сортировка по rating and title");
         for (Movie movie : movies)
             System.out.println(movie.toString());
+    }
+
+
+    public static void listToSet(List<Movie> movies) { //ukr
+
+        Set<Movie> set = new TreeSet<>(Comparator.comparing(movie -> movie.getRating()));
+        set.addAll(movies);
+        System.out.println("\n сделать сет");
+        for (Movie movie : set) {
+            System.out.println(movie);
+        }
     }
 }
 
