@@ -1,12 +1,12 @@
 package Framework;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Elem {
@@ -14,7 +14,7 @@ public class Elem {
     private static final long DEFAULT_TIMEOUT = 30;
     private static WebDriver driver;
     private static WebDriverWait wait;
-    private static  Listener listener;
+    private static Listener listener;
     private By by;
     private String cssSelector;
 
@@ -30,13 +30,13 @@ public class Elem {
         driver = webDriver;
     }
 
-    public static void setUrl(String url){ driver.get(url);
+    public static void setUrl(String url) {
+        driver.get(url);
     }
 
     public void click(long timeoutSeconds) {
         WebElement wer = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds))
                 .until(ExpectedConditions.elementToBeClickable(by));
-       // listener.beforeFindBy(by,wer,driver);
         driver.findElement(by).click();
     }
 
@@ -48,16 +48,59 @@ public class Elem {
         return cssSelector;
     }
 
-    public void getText(long timeoutSeconds) {
+
+    public  String getAttribute(long timeoutSeconds,String att) {
         WebElement wer = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds))
                 .until(ExpectedConditions.presenceOfElementLocated(by));
-        driver.findElement(by).getText();
+        return driver.findElement(by).getAttribute(att);
     }
-    public String getText1() {
+
+    public String getText() {
         WebElement wer = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT))
                 .until(ExpectedConditions.presenceOfElementLocated(by));
-        //driver.findElement(by).getText();
-
         return driver.findElement(by).getText();
+    }
+
+/*    public Boolean isPresent() {
+
+            WebElement wer = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT))
+                    .until(ExpectedConditions.presenceOfElementLocated(by));
+          return  driver.findElement(by).isDisplayed();
+
+    }*/
+
+    public List<Elem> findElements() {
+        List<WebElement> list = driver.findElements(by);
+        List<Elem> result = new ArrayList<>(list.size());
+        for (int i = 1; i <= 5; i++) {
+            String selector = getCssSelector() + ":nth-child(" + i + ")";
+            Elem elem = new Elem(selector);
+            result.add(elem);
+        }
+        return result;
+    }
+
+
+    public boolean isPresent()  {
+        try
+        {
+            return driver.findElement(by).isDisplayed();
+        }
+        catch (NoSuchElementException e)
+        { throw new ElemException("My exception say that element is not present");
+
+        }
+    }
+
+    public void isClickable()  {
+        try
+        {
+            driver.findElement(by).isEnabled();
+
+        }//не знаю как отловіть клібакбле
+        catch (ElementClickInterceptedException e)
+        { throw new WebElementNotClickableException("My exception say that element is not clickable");
+
+        }
     }
 }

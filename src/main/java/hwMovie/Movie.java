@@ -1,5 +1,11 @@
 package hwMovie;
 
+import Framework.Elem;
+import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
+
+import java.util.Objects;
+
 public class Movie {
     public String getTitle() {
         return title;
@@ -32,6 +38,18 @@ public class Movie {
         return "[position=" + this.position + ", title=" + this.title + ", rationg=" + this.rating + ", year=" + this.year + "]";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+ return Double.compare(movie.rating, rating) == 0 && position == movie.position && year == movie.year && Objects.equals(title, movie.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, rating, position, year);
+    }
 
 
 }

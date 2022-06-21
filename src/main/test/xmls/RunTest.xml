@@ -1,0 +1,11 @@
+<suite name="API SMOKE" parallel="tests" thread-count="5">
+    <test name="Comments">
+        <classes>
+            <class name="test.Imdb">
+
+
+
+            </class>
+        </classes>
+    </test>
+</suite>

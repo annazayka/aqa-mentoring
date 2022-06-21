@@ -24,19 +24,13 @@ public class hwMovie {
 
         System.setProperty("webdriver.chrome.driver", "/Users/hanna/Documents/chromedriver");
         PropertyConfigurator.configure(path); //где правильно это определять?
-        ChromeOptions options = new Options()
-                .openBrowserFullScreen()
-                //  .addCustomUserAgent()
-                .setPageLoadStrategy(PageLoadStrategy.EAGER)
-                .getOptions();
-
         WebDriver driver = Driver.getChromeDriver();
-        EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
-        eventDriver.register(new Listener());
+     //   EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
+     //   eventDriver.register(new Listener());
 
-        Elem.initWebDriver(eventDriver);
+        Elem.initWebDriver(driver);
 
-        MoviePage mp = new MoviePage(eventDriver);
+        MoviePage mp = new MoviePage(driver);
         mp.openPage();
         List<Movie> movies = mp.getMovieInfo();
         sortNature(movies);

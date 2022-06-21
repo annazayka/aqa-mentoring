@@ -1,5 +1,6 @@
 package Framework;
 
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,8 +12,16 @@ public class Driver {
     public Driver() {};
 
     public static WebDriver getChromeDriver() {
+        System.setProperty("webdriver.chrome.driver", "/Users/hanna/Documents/chromedriver");
+
         if (driver == null) {
-            driver = new ChromeDriver();
+            ChromeOptions options = new Options()
+                  //  .openBrowserFullScreen()
+                    //  .addCustomUserAgent()
+                    .setPageLoadStrategy(PageLoadStrategy.EAGER)
+                    .getOptions();
+            driver = new ChromeDriver(options);
+            //driver = new ChromeDriver();
 
         }
         return driver;
@@ -20,7 +29,8 @@ public class Driver {
 
     public static WebDriver getChromeDriver(ChromeOptions options) {
         if (driver == null) {
-            driver = new ChromeDriver(options);
+
+
 
         }
         return driver;
