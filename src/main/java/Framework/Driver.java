@@ -29,11 +29,13 @@ public class Driver {
 
     public static WebDriver getChromeDriver(ChromeOptions options) {
         if (driver == null) {
-
+return driver;
 
 
         }
-        return driver;
+        else
+        return  new ChromeDriver(options);
+
     }
 
 

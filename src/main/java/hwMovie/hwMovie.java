@@ -22,7 +22,7 @@ public class hwMovie {
 
       //  List<Movie> movies = new LinkedList<Movie>();
 
-        System.setProperty("webdriver.chrome.driver", "/Users/hanna/Documents/chromedriver");
+      //  System.setProperty("webdriver.chrome.driver", "/Users/hanna/Documents/aqa-mentoring/chromedriver");
         PropertyConfigurator.configure(path); //где правильно это определять?
         WebDriver driver = Driver.getChromeDriver();
      //   EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
