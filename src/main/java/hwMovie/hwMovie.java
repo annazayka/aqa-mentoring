@@ -16,13 +16,9 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import java.util.*;
 
 
-public class hwMovie {
+public class hwMovie  {
     static final String path = "src/main/log.properties"; //где правильно это определять?
-    public static void main(String[] args) {
-
-      //  List<Movie> movies = new LinkedList<Movie>();
-
-      //  System.setProperty("webdriver.chrome.driver", "/Users/hanna/Documents/aqa-mentoring/chromedriver");
+    public static void main(String[] args) throws Exception{
         PropertyConfigurator.configure(path); //где правильно это определять?
         WebDriver driver = Driver.getChromeDriver();
      //   EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);

@@ -8,6 +8,7 @@ import hwMovie.MoviePage;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -20,12 +21,17 @@ public class Imdb {
     private WebDriver driver = Driver.getChromeDriver();
     public MoviePage mp = new MoviePage(driver);
     SoftAssert softAssert = new SoftAssert();
-    int randValue = new Random().nextInt(5);
+   // int randValue = 3; //new Random().nextInt(5);
 
 
-    @BeforeTest
+    @DataProvider(name = "data-provider")
+    public Object[][] dpMethod(){
+       // int rv=new Random().nextInt(250);
+        return new Object[][] {{5}};
+    }
+   @BeforeTest
     public void setupTest() {
-        System.setProperty("webdriver.chrome.driver", "/Users/hanna/Documents/chromedriver");
+       // System.setProperty("webdriver.chrome.driver", "/Users/hanna/Documents/chromedriver");
         Elem.initWebDriver(driver);
         mp.openPage();
     }
@@ -43,19 +49,15 @@ public class Imdb {
 
     }
 
-    @Test(priority = 2)
-    public void CheckElement() {
-
-        Elem elements = mp.checkElements();
-        softAssert.assertTrue(new Elem(elements.getCssSelector()+mp.titleCSS).isPresent(), "title is absent");
-        softAssert.assertTrue(new Elem(elements.getCssSelector()+mp.rateCSS).isPresent(), "rate is absensed");
-        softAssert.assertTrue(new Elem(elements.getCssSelector()+mp.yearCSS).isPresent(), "year is missed");
-        softAssert.assertAll();
+    @Test(priority = 2,dataProvider = "data-provider")
+    public void CheckElement(int randMoviePosition) {
+        mp.checkElements(randMoviePosition);
     }
 
-    @Test(priority = 3)
-    public void goToCard(){
-       Elem button= mp.getButton(randValue);
+    @Test(priority = 3,dataProvider = "data-provider")
+
+    public void goToCard(int randMoviePosition)  throws Exception{
+        Elem button= mp.getButton(randMoviePosition);
         button.isClickable();
         button.click();
 
@@ -63,13 +65,12 @@ public class Imdb {
 
 
 
-   @Test(priority = 4)
-    public void CompareObject() {
+   @Test(priority = 4, dataProvider = "data-provider")
+    public void CompareObject(int randMoviePosition) {
        MovieCardPage card = new MovieCardPage(driver);
-       card.getCardInfo(randValue);
-        softAssert.assertEquals(card.getCardInfo(randValue).getPosition(),mp.movies.get(randValue).getPosition(), "soo baddd");
-        softAssert.assertEquals(card.getCardInfo(randValue).getRating(), mp.movies.get(randValue).getRating() );
-        softAssert.assertEquals(card.getCardInfo(randValue).getTitle() , mp.movies.get(randValue).getTitle());
+       card.getCardInfo(randMoviePosition);
+        softAssert.assertEquals(card.getCardInfo(randMoviePosition).getRating(), mp.movies.get(randMoviePosition-1).getRating() );
+        softAssert.assertEquals(card.getCardInfo(randMoviePosition).getTitle() , mp.movies.get(randMoviePosition-1).getTitle());
         softAssert.assertAll();
     }
 

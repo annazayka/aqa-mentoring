@@ -1,0 +1,11 @@
+<suite name="Currency" parallel="tests" thread-count="5">
+    <test name="Bank ">
+        <classes>
+            <class name="test.CurrencyTest">
+
+
+
+            </class>
+        </classes>
+    </test>
+</suite>

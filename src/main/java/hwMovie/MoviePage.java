@@ -3,16 +3,14 @@ package hwMovie;
 import Framework.Elem;
 import Framework.ElemException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.asserts.SoftAssert;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
-public class MoviePage {
+public class MoviePage  {
 
     public Elem rowMovie = new Elem(" .lister-list tr");
     public Elem titleCSS = new Elem(" .titleColumn a");
@@ -61,29 +59,27 @@ public class MoviePage {
     }
 
 
-    public void checkElements() throws ElemException {
+    public void checkElements(int randMoviePosition) throws ElemException {
         List<Elem> elements = rowMovie.findElements();
         SoftAssert softAssert =new SoftAssert();
-        softAssert.assertTrue(new Elem(elements.get(3).getCssSelector()+titleCSS.getCssSelector()).isPresent());
-        softAssert.assertTrue(new Elem(elements.get(3).getCssSelector()+yearCSS.getCssSelector()).isPresent());
-        softAssert.assertTrue(new Elem(elements.get(3).getCssSelector()+rateCSS.getCssSelector()).isPresent());
+        //softAssert.assertTrue(new Elem(elements.get(randMoviePosition).getCssSelector()+titleCSS.getCssSelector()).isPresent());
+        //softAssert.assertTrue(new Elem(elements.get(randMoviePosition).getCssSelector()+yearCSS.getCssSelector()).isPresent());
+        //softAssert.assertTrue(new Elem(elements.get(randMoviePosition).getCssSelector()+rateCSS.getCssSelector()).isPresent());
+        softAssert.assertTrue(new Elem(String.format("%s %s",elements.get(randMoviePosition).getCssSelector(),rateCSS.getCssSelector())).isPresent());
+        softAssert.assertTrue(new Elem(String.format("%s %s",elements.get(randMoviePosition).getCssSelector(),titleCSS.getCssSelector())).isPresent());
+        softAssert.assertTrue(new Elem(String.format("%s %s",elements.get(randMoviePosition).getCssSelector(),yearCSS.getCssSelector())).isPresent());
         softAssert.assertAll();
-
-       /*  softAssert.assertTrue(new Elem(elements.getCssSelector()+mp.titleCSS.getCssSelector()).isPresent(), "title is absent");
-        softAssert.assertTrue(new Elem(elements.getCssSelector()+mp.rateCSS.getCssSelector()).isPresent(), "rate is absensed");
-        softAssert.assertTrue(new Elem(elements.getCssSelector()+mp.yearCSS.getCssSelector()).isPresent(), "year is missed");
-        softAssert.assertAll();*/
-
-       // return elements.get(3);
-
 }
 
-   public Elem getButton(int position)  {
+   public Elem getButton(int randMoviePosition)  throws Exception {
        List<Elem> elements = rowMovie.findElements();
-      //    return new Elem(elements.get(position).getCssSelector() + titleCSS);
-      return new Elem(String.format("%s:nth-child(%d) %s",rowMovie.getCssSelector(),position,titleCSS.getCssSelector()));
+      return new Elem(String.format("%s:nth-child(%d) %s",rowMovie.getCssSelector(),randMoviePosition,titleCSS.getCssSelector()));
     }
 
 
 
 }
+
+
+
+

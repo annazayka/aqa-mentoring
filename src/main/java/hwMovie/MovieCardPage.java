@@ -19,7 +19,7 @@ public class MovieCardPage {
         Movie movieCard = new Movie(
                 titleCSS.getText(),
                 Double.parseDouble(ratingCSS.getAttribute(2,"innerHTML")),
-                randValue+1,
+                randValue,
                 Integer.parseInt(yearCSS.getAttribute(2,"innerHTML")));
         return movieCard;
         }

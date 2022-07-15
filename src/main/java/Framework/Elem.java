@@ -72,7 +72,7 @@ public class Elem {
     public List<Elem> findElements() {
         List<WebElement> list = driver.findElements(by);
         List<Elem> result = new ArrayList<>(list.size());
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= list.size(); i++) {
             String selector = getCssSelector() + ":nth-child(" + i + ")";
             Elem elem = new Elem(selector);
             result.add(elem);
@@ -92,13 +92,15 @@ public class Elem {
         }
     }
 
-    public void isClickable()  {
+    public void isClickable() throws  WebElementNotClickableException  {
         try
         {
+            WebElement wer = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT))
+                    .until(ExpectedConditions.elementToBeClickable(by));
             driver.findElement(by).isEnabled();
 
         }//не знаю как отловіть клібакбле
-        catch (ElementClickInterceptedException e)
+        catch (TimeoutException e)
         { throw new WebElementNotClickableException("My exception say that element is not clickable");
 
         }

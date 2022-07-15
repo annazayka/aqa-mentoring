@@ -1,6 +1,8 @@
 package Framework;
 
-public class WebElementNotClickableException extends RuntimeException{
+import java.util.concurrent.TimeoutException;
+
+public class WebElementNotClickableException extends Exception {
 
 
         public WebElementNotClickableException(String message) {
