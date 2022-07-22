@@ -81,7 +81,7 @@ public class Elem {
     }
 
 
-    public boolean isPresent()  {
+    public boolean isPresent() throws ElemException {
         try
         {
             return driver.findElement(by).isDisplayed();

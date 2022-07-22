@@ -1,6 +1,6 @@
 package Framework;
 
-public class ElemException extends RuntimeException{
+public class ElemException extends Exception{
 
 
         public ElemException(String message) {
